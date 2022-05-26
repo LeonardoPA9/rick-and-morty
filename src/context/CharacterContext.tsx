@@ -63,6 +63,7 @@ const CharacterProvider = ({ children }: Provider) => {
 
   const fetchCharacters = async (url?: string, query: string = "") => {
     setLoading(true);
+    
     try {
       const res = await axios.get(
         `${url ? url : BASE_URL}${!url ? query : ""}`
@@ -102,7 +103,6 @@ const CharacterProvider = ({ children }: Provider) => {
     setCurrentQuery("");
     setCharacterSearch("");
     setEpisodeNumber(1);
-    if(isHome) fetchCharacters()
   };
 
   return (

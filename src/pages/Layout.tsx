@@ -5,15 +5,16 @@ import FilterByType from "./Home/FilterByType";
 import { CharacterContext } from "../context/CharacterContext";
 import EpisodeFilter from "./Episodes/EpisodeFilter";
 import { routerRoutes } from "../utils/Routes";
+import Pagination from "../components/Pagination/Pagination";
 
 const Layout = () => {
   const {
     character,
-    fetchCharacters,
     fetchFilteredCharacters,
     handleCharacterSearch,
     characterSearch,
     resetFilters,
+    currentQuery,
   } = useContext(CharacterContext);
   const { pathname } = useLocation();
 
@@ -47,22 +48,12 @@ const Layout = () => {
               </button>
             </form>
           </div>
-          <div className="row mb-5 justify-content-center row-cols-2">
-            <button
-              disabled={!character?.info?.prev}
-              onClick={() => fetchCharacters(character?.info.prev)}
-              className="mx-2 col-2 btn btn-success"
-            >
-              Previous
-            </button>
-            <button
-              disabled={!character?.info?.next}
-              onClick={() => fetchCharacters(character?.info.next)}
-              className="mx-2 col-2 btn btn-success"
-            >
-              Next
-            </button>
-          </div>
+          <Pagination
+            currentQuery={currentQuery}
+            character={character}
+            onPaginate={fetchFilteredCharacters}
+            goFirst={resetFilters}
+          />
         </>
       )}
       <div className="row">

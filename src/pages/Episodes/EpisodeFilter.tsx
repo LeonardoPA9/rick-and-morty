@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { CharacterContext } from "../../context/CharacterContext";
-import { createArrayFromRange } from "../../utils/ui";
+import { createArrayFromNumber } from "../../utils/ui";
 
 const EpisodeFilter = () => {
   const { episodeData, episodeNumber, setEpisodeNumber } =
     useContext(CharacterContext);
+    const CURRENT_EPISODES = 51
   return (
     <div className="card text-center">
       <div className="card-header">{episodeData?.episode} </div>
@@ -17,7 +18,7 @@ const EpisodeFilter = () => {
           className="form-select form-select-sm"
           aria-label=".form-select-sm example"
         >
-          {createArrayFromRange(51).map((value) => (
+          {createArrayFromNumber(CURRENT_EPISODES).map((value) => (
             <option key={value} value={value}>
               {value}
             </option>

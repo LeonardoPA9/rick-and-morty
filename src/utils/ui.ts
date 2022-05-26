@@ -30,8 +30,32 @@ const matchingParameters = (
   return query.search(REGEX) !== -1;
 };
 
-const createArrayFromRange = (length: number): number[] => {
+const createArrayFromNumber = (length: number): number[] => {
   return Array.from({ length }, (_, i) => i + 1);
 };
 
-export { getBadgeType, capitalize, matchingParameters, createArrayFromRange };
+const createArrayFromRange = (
+  start: number,
+  stop: number,
+  step: number = 1
+) => {
+  const length = Math.ceil((stop - start) / step);
+  return Array.from({ length }, (_, i) => i * step + start);
+};
+
+const getParameterByName = (name: string, url: string) => {
+  name = name.replace(/[\[\]]/g, "\\$&");
+  const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return "";
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+export {
+  getBadgeType,
+  capitalize,
+  matchingParameters,
+  createArrayFromNumber,
+  getParameterByName,
+  createArrayFromRange,
+};

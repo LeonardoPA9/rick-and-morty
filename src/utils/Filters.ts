@@ -22,6 +22,13 @@ const queryConstructor = (url: string, type: string, value: string): string => {
     const pattern = new RegExp("\\b(" + type + "=).*?(&|#|$)");
     if (url.includes(type)) {
       query = url.replace(pattern, `${type}=${value}&`);
+      if (
+        query.includes("page") &&
+        ["status", "gender", "species", "name"].includes(type)
+      ) {
+        let page = getParameterByName("page", query) as string;
+        query = query.replace(page, "1");
+      }
       if (query.endsWith("&")) {
         return query.substring(0, query.length - 1);
       }

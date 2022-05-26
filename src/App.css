@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.input {
+  border: 2px solid #96cd4c;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
